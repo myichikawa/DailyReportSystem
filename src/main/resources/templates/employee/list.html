@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Daily Report System</title>
+    <meta charset="UTF-8">
+    <title>Daily Report System</title>
+    <link rel="stylesheet" th:href="@{/css/employee/list.css}">
 </head>
 <body>
     <h1>従業員一覧</h1>
-
+    <table>
+        <tr>
+            <th>社員番号</th>
+            <th>氏名</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="data : ${employeelist}">
+            <td th:text="${data.id}"></td>
+            <td th:text="${data.name}"></td>
+        </tr>
+    </table>
+    <p><a th:href="@{/employee/resister}">従業員登録</a></p>
 </body>
 </html>
