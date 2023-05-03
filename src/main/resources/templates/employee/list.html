@@ -13,9 +13,9 @@
             <th>氏名</th>
             <th>操作</th>
         </tr>
-        <tr th:each="data : ${employeelist}">
-            <td th:text="${data.id}"></td>
-            <td th:text="${data.name}"></td>
+        <tr th:each="employee : ${employeelist}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
         </tr>
     </table>
     <p><a th:href="@{/employee/resister}">従業員登録</a></p>

@@ -6,6 +6,13 @@
 </head>
 <body>
     <h1>従業員詳細</h1>
+    <table th:each="employee : ${employee}" th:object="${employee}">
+        <tr><th>社員番号</th><td:text="${id}"></td></tr>
+        <tr><th>氏名</th><td:text="${name}"></td></tr>
+        <tr><th>権限</th><td:text="${name}"></td></tr>
+        <tr><th>登録日時</th><td:text="${created_at}"></td></tr>
+        <tr><th>更新日時</th><td:text="${updated_at}"></td></tr>
+    </table>
     <p><a th:href="@{/employee/update}">従業員編集</a></p>
     <p><a th:href="@{/employee/list}">一覧に戻る</a></p>
 

@@ -15,11 +15,14 @@ public class EmployeeService {
     @Autowired
     public EmployeeService (EmployeeRepository repository) {
         this.employeeRepository = repository;
-
     }
 
     public List<Employee> getEmployeeList(){
         return employeeRepository.findAll();
+    }
+
+    public Employee getEmployee(Integer id) {
+        return employeeRepository.findById(id).get();
     }
 
 }
