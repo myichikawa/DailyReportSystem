@@ -3,9 +3,12 @@ package com.techacademy.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.techacademy.entity.Employee;
 import com.techacademy.service.EmployeeService;
 
 @Controller
@@ -16,24 +19,28 @@ public class EmployeeController {
     public EmployeeController(EmployeeService service) {
         this.service = service;
     }
-
+    // 一覧画面
     @GetMapping("/list")
     public String getList(Model model) {
         model.addAttribute("employeelist", service.getEmployeeList());
         return "employee/list";
     }
-
+    // 詳細画面
     @GetMapping("/detail/{id}")
     public String getDetail(@PathVariable Integer id, Model model) {
-
         model.addAttribute("employee", service.getEmployee(id));
         return "employee/detail";
     }
-
-
-    @GetMapping("/resister")
-    public String getResister() {
-        return "employee/resister";
+    // 登録画面
+    @GetMapping("/register")
+    public String getRegister(@ModelAttribute Employee employee) {
+        return "employee/register";
+    }
+    // 登録処理
+    @PostMapping("/register")
+    public String postRegister(Employee employee) {
+        service.saveEmployee(employee);
+        return "redirect:/employee/list";
     }
     @GetMapping("/update")
     public String getUpdate() {

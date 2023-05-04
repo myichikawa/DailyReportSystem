@@ -23,13 +23,13 @@ import lombok.Data;
     private String name;
 
     @Column(nullable = false)
-    private String delete_flag;
+    private String deleteFlag;
 
     @Column(nullable = false)
-    private String created_at;
+    private String createdAt;
 
     @Column(nullable = false)
-    private String updated_at;
+    private String updatedAt;
 
     @OneToOne(mappedBy = "employee")
     private Authentication authentication;

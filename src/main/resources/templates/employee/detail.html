@@ -7,11 +7,11 @@
 <body>
     <h1>従業員詳細</h1>
     <table th:object="${employee}">
-        <tr><th>社員番号</th><td th:text="*{id}"></td></tr>
+        <tr><th>社員番号</th><td th:text="*{authentication.code}"></td></tr>
         <tr><th>氏名</th><td th:text="*{name}"></td></tr>
-        <tr><th>権限</th><td th:text="*{name}"></td></tr>
-        <tr><th>登録日時</th><td th:text="*{created_at}"></td></tr>
-        <tr><th>更新日時</th><td th:text="*{updated_at}"></td></tr>
+        <tr><th>権限</th><td th:text="*{authentication.role}"></td></tr>
+        <tr><th>登録日時</th><td th:text="*{createdAt}"></td></tr>
+        <tr><th>更新日時</th><td th:text="*{updatedAt}"></td></tr>
     </table>
     <p><a th:href="@{/employee/update}">従業員編集</a></p>
     <p><a th:href="@{/employee/list}">一覧に戻る</a></p>

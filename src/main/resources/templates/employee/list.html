@@ -14,12 +14,12 @@
             <th>操作</th>
         </tr>
         <tr th:each="employee : ${employeelist}">
-            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.authentication.code}"></td>
             <td th:text="${employee.name}"></td>
             <td><a th:href="@{detail/{id}/(id=${employee.id})}">詳細を見る</a></td>
             <!--/*@{/employee/detail/ employee消したらできた*/-->
         </tr>
     </table>
-    <p><a th:href="@{/employee/resister}">従業員登録</a></p>
+    <p><a th:href="@{/employee/register}">従業員登録</a></p>
 </body>
 </html>
