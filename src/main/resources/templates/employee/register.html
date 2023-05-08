@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Daily Report System</title>
+    <meta charset="UTF-8">
+    <title>Daily Report System</title>
+    <link rel="stylesheet" th:href="@{/css/employee/register.css}">
 </head>
 <body>
     <h1>従業員登録</h1>
@@ -18,7 +19,6 @@
     <br>
 
     <label for="authentication.role">権限</label>
-
     <select th:field="*{authentication.role}">
         <option value="" th:text="選択してください">
         <option th:each="item:${T(com.techacademy.entity.Authentication.Role).values()}" th:value="${item}" th:text="${item}">

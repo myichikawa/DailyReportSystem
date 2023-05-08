@@ -1,5 +1,8 @@
 package com.techacademy.entity;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "employee")
+@Where(clause = "delete_flag = 0")
     public class Employee {
 
     @Id
@@ -23,15 +29,15 @@ import lombok.Data;
     private String name;
 
     @Column(nullable = false)
-    private String deleteFlag;
+    private Integer deleteFlag;
 
     @Column(nullable = false)
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Authentication authentication;
 }
 

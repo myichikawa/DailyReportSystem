@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techacademy.entity.Employee;
 import com.techacademy.service.EmployeeService;
@@ -42,9 +43,24 @@ public class EmployeeController {
         service.saveEmployee(employee);
         return "redirect:/employee/list";
     }
-    @GetMapping("/update")
-    public String getUpdate() {
+    // 更新画面
+    @GetMapping("/update/{id}")
+    public String getUpdate(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("employee", service.getEmployee(id));
         return "employee/update";
     }
-}
+    // 更新処理
+    @PostMapping("/update")
+    public String postUpdate(@RequestParam("id") Integer id, Employee employee, Model model) {
 
+    model.addAttribute("employee", service.getEmployee(id));
+    service.saveEmployee(employee);
+        return "redirect:/employee/list";
+    }
+    // 削除処理
+    @PostMapping("/delete")
+    public String deleteRun(@RequestParam("id") Integer id, Model model) {
+        service.deleteEmployee(id);
+        return "redirect:/employee/list";
+    }
+}
