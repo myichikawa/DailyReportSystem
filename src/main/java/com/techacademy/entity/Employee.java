@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.Where;
@@ -43,6 +44,7 @@ import lombok.Data;
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    @Valid
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Authentication authentication;
 
