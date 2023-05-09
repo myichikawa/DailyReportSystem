@@ -32,6 +32,7 @@ public class EmployeeService {
         employee.setCreatedAt(LocalDateTime.now());
         employee.setUpdatedAt(LocalDateTime.now());
         employee.setDeleteFlag(0);
+
         Authentication au = employee.getAuthentication();
         au.setEmployee(employee);
         employee.setAuthentication(au);
@@ -41,7 +42,9 @@ public class EmployeeService {
 
     @Transactional
     public void deleteEmployee(Integer id) {
-            employeeRepository.deleteById(id);
+        Employee employee = getEmployee(id);
+        employee.setDeleteFlag(1);
+        employeeRepository.save(employee);
         }
 
 }

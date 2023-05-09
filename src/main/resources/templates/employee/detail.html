@@ -11,8 +11,8 @@
         <tr><th>社員番号</th><td th:text="*{authentication.code}"></td></tr>
         <tr><th>氏名</th><td th:text="*{name}"></td></tr>
         <tr><th>権限</th><td th:text="*{authentication.role}"></td></tr>
-        <tr><th>登録日時</th><td th:text="*{createdAt}"></td></tr>
-        <tr><th>更新日時</th><td th:text="*{updatedAt}"></td></tr>
+        <tr><th>登録日時</th><td th:text="${#temporals.format(employee.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td></tr>
+        <tr><th>更新日時</th><td th:text="${#temporals.format(employee.updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td></tr>
     </table>
     <p><a th:href="@{/employee/update/{id}/(id=${employee.id})}">この従業員を編集する</a></p>
     <p><a th:href="@{/employee/list}">一覧に戻る</a></p>

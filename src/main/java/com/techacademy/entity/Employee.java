@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.Data;
 
@@ -39,6 +41,14 @@ import lombok.Data;
 
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Authentication authentication;
+
+    @PreRemove
+    @Transactional
+    private void preRemove() {
+        if (authentication!=null) {
+            authentication.setEmployee(null);
+        }
+    }
 }
 
 

@@ -50,16 +50,20 @@ public class EmployeeController {
         return "employee/update";
     }
     // 更新処理
-    @PostMapping("/update")
-    public String postUpdate(@RequestParam("id") Integer id, Employee employee, Model model) {
+    @PostMapping("/update/{id}")
+    public String postUpdate(@PathVariable("id") Integer id, @RequestParam("password")String password, Employee employee, Model model) {
 
     model.addAttribute("employee", service.getEmployee(id));
+    if(!"".equals(password)) {
+        employee.getAuthentication().setPassword(password);
+    }
     service.saveEmployee(employee);
         return "redirect:/employee/list";
     }
     // 削除処理
-    @PostMapping("/delete")
-    public String deleteRun(@RequestParam("id") Integer id, Model model) {
+    @GetMapping("/delete/{id}")
+    public String deleteRun(@PathVariable("id") Integer id, Model model) {
+
         service.deleteEmployee(id);
         return "redirect:/employee/list";
     }
