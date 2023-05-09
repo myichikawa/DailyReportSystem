@@ -1,5 +1,7 @@
 package com.techacademy.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,10 @@ import com.techacademy.service.EmployeeService;
 @Controller
 @RequestMapping("employee")
 public class EmployeeController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private final EmployeeService service;
 
     public EmployeeController(EmployeeService service) {
@@ -55,7 +61,7 @@ public class EmployeeController {
 
     model.addAttribute("employee", service.getEmployee(id));
     if(!"".equals(password)) {
-        employee.getAuthentication().setPassword(password);
+        employee.getAuthentication().setPassword(passwordEncoder.encode(password));
     }
     service.saveEmployee(employee);
         return "redirect:/employee/list";
