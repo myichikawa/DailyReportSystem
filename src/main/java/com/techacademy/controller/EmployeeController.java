@@ -32,6 +32,7 @@ public class EmployeeController {
     @GetMapping("/list")
     public String getList(Model model) {
         model.addAttribute("employeelist", service.getEmployeeList());
+        model.addAttribute("employeecount", service.index());
         return "employee/list";
     }
     // 詳細画面
@@ -64,13 +65,17 @@ public class EmployeeController {
     }
     // 更新処理
     @PostMapping("/update/{id}")
-    public String postUpdate(@PathVariable("id") Integer id, @RequestParam("password")String password, Employee employee, Model model) {
+    public String postUpdate(@PathVariable("id") Integer id, @RequestParam("password")String password, Employee employee, Model model, BindingResult res) {
 
+        if(res.hasErrors()) {
+            // エラーあり
+            return getUpdate(null, model);
+        }
     model.addAttribute("employee", service.getEmployee(id));
-    if(!"".equals(password)) {
-        employee.getAuthentication().setPassword(passwordEncoder.encode(password));
+        if(!"".equals(password)) {
+            employee.getAuthentication().setPassword(passwordEncoder.encode(password));
     }
-    service.saveEmployee(employee);
+    service.updateEmployee(employee);
         return "redirect:/employee/list";
     }
     // 削除処理

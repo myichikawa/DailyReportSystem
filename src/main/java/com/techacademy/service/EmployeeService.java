@@ -27,7 +27,13 @@ public class EmployeeService {
     public Employee getEmployee(Integer id) {
         return employeeRepository.findById(id).get();
     }
+    //レコード数のカウント
+    public long index() {
+        return employeeRepository.count();
+    }
+
     //登録
+
     @Transactional
     public Employee saveEmployee(Employee employee) {
         employee.setCreatedAt(LocalDateTime.now());
@@ -40,6 +46,19 @@ public class EmployeeService {
 
         return employeeRepository.save(employee);
     }
+    //更新
+    @Transactional
+    public Employee updateEmployee(Employee employee) {
+        employee.setUpdatedAt(LocalDateTime.now());
+        employee.setDeleteFlag(0);
+
+        Authentication au = employee.getAuthentication();
+        au.setEmployee(employee);
+        employee.setAuthentication(au);
+
+        return employeeRepository.save(employee);
+    }
+
 
     @Transactional
     public void deleteEmployee(Integer id) {
