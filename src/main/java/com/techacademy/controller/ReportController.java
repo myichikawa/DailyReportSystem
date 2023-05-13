@@ -73,8 +73,10 @@ public class ReportController {
 
         Report tableReport = service.getReport(id);
         report.setCreatedAt(tableReport.getCreatedAt());
+
+        report.setEmployee(userDetail.getEmployee());
         service.updateReport(report);
-            return "redirect:/Report/list";
+            return "redirect:/report/list";
 
     }
 }

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,13 +30,16 @@ public class Report {
     private Integer id;
 
     @Column(nullable = false)
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reportDate;
 
     @Column(length = 255, nullable = false)
+    @NotEmpty
     private String title;
 
     @Column(nullable = false)
+    @NotEmpty
     @Type(type="text")
     private String content;
 
