@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Daily Report System</title>
-    <link rel="stylesheet" th:href="@{/css/report/.css}">
+    <link rel="stylesheet" th:href="@{/css/report/detail.css}">
 </head>
 <body>
     <h1>日報 詳細</h1>
     <table th:object="${report}">
-        <tr><th>氏名</th><td th:text="*{name}"></td></tr>
+        <tr><th>氏名</th><td th:text="*{employee.name}"></td></tr>
         <tr><th>日付</th><td th:text="*{reportDate}"></td></tr>
         <tr><th>タイトル</th><td th:text="*{title}"></td></tr>
         <tr><th>内容</th><td th:text="*{content}"></td></tr>

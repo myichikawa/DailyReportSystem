@@ -6,24 +6,28 @@
     <link rel="stylesheet" th:href="@{/css/report/register.css}">
 </head>
 <body>
-    <h1>日報 登録</h1>
+    <h1>日報 新規登録ページ</h1>
     <form method="post" th:action="@{/report/register}" th:object="${report}">
 
     <label for="reportDate">日付</label>
-    <input type="date" th:field="*{reportDate}">
-
-    <label for="employee.name">氏名</label>
-    <input th:text="*{employee.name}" type="hidden" th:field="*{employee.name}">
     <br>
-
+    <input type="date" th:field="*{reportDate}" th:errorclass="err">
+    <span th:errors="*{reportDate}" class="err"></span>
+    <br>
+    <label for="loginuser.name">氏名</label>
+    <br>
+    <input type="text" th:field="${loginuser.name}">
+    <br>
     <label for="title">タイトル</label>
-    <input type="text" th:field="*{title}">
+    <br>
+    <input type="text" th:field="*{title}" th:errorclass="err">
+    <span th:errors="*{title}" class="err"></span>
     <br>
     <label for="content">内容</label>
-    <pre>
-    <input type="text" th:field="*{content}">
-    </pre>
-
+    <br>
+    <textarea rows="10" cols="50" th:field="*{content}" th:errorclass="err"></textarea>
+    <span th:errors="*{content}" class="err"></span>
+    <br>
     <input type="submit" value="投稿">
     <p><a th:href="@{/report/list}">一覧に戻る</a></p>
     </form>

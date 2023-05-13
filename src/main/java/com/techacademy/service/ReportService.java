@@ -35,7 +35,11 @@ public class ReportService {
         report.setCreatedAt(LocalDateTime.now());
         report.setUpdatedAt(LocalDateTime.now());
 
-
+        return reportRepository.save(report);
+    }
+    //更新
+    public Report updateReport(Report report) {
+        report.setUpdatedAt(LocalDateTime.now());
 
         return reportRepository.save(report);
     }

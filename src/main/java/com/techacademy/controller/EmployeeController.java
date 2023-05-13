@@ -46,17 +46,23 @@ public class EmployeeController {
     public String getRegister(@ModelAttribute Employee employee) {
         return "employee/register";
     }
+
     // 登録処理
     @PostMapping("/register")
     public String postRegister(@Validated Employee employee, BindingResult res) {
-        if(res.hasErrors()) {
-            // エラーあり
-            return getRegister(employee);
-        }
-
-        service.saveEmployee(employee);
+        try {
+            if(res.hasErrors()) {
+                // エラーあり
+                return getRegister(employee);
+            }
+            employee.getAuthentication().setPassword(passwordEncoder.encode(employee.getAuthentication().getPassword()));
+            service.saveEmployee(employee);
+        } catch (Exception e) {
+    }
         return "redirect:/employee/list";
     }
+
+
     // 更新画面
     @GetMapping("/update/{id}")
     public String getUpdate(@PathVariable("id") Integer id, Model model) {
@@ -65,16 +71,19 @@ public class EmployeeController {
     }
     // 更新処理
     @PostMapping("/update/{id}")
-    public String postUpdate(@PathVariable("id") Integer id, @RequestParam("password")String password, Employee employee, Model model, BindingResult res) {
+    public String postUpdate(@PathVariable("id") Integer id, @RequestParam("password")String password, @Validated Employee employee, BindingResult res, Model model) {
 
         if(res.hasErrors()) {
             // エラーあり
-            return getUpdate(null, model);
+            return getUpdate(employee.getId(), model);
         }
-    model.addAttribute("employee", service.getEmployee(id));
         if(!"".equals(password)) {
             employee.getAuthentication().setPassword(passwordEncoder.encode(password));
-    }
+        }
+    Employee tableEmployee = service.getEmployee(id);
+    employee.setCreatedAt(tableEmployee.getCreatedAt());
+
+    model.addAttribute("employee", service.getEmployee(id));
     service.updateEmployee(employee);
         return "redirect:/employee/list";
     }

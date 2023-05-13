@@ -8,35 +8,27 @@
 <body>
     <h1>日報 編集</h1>
 
-    <form method="post" th:action="@{/employee/update/{id}/(id=${employee.id})}" th:object="${employee}">
+    <form method="post" th:action="@{/report/update/{id}/(id=${report.id})}" th:object="${report}">
     <input type="hidden" th:field="*{id}">
 
-    <label for="authentication.code">社員番号</label>
-    <input th:text="*{authentication.code}" type="hidden" th:field="*{authentication.code}">
+    <label for="reportDate">日付</label>
     <br>
-
-    <label for="name">氏名</label>
-    <input type="text" th:field="*{name}">
+    <input type="date" th:field="*{reportDate}">
     <br>
-
-    <label for="password">パスワード</label>
-    <input type="password" id="password" name="password" value="">
-    <input type="hidden" th:field="*{authentication.password}">
+    <label for="loginuser.name">氏名</label>
     <br>
-
-    <label for="authentication.role">権限</label>
-
-    <select th:field="*{authentication.role}">
-        <option value="" th:text="選択してください">
-        <option th:each="item:${T(com.techacademy.entity.Authentication.Role).values()}" th:value="${item}" th:text="${item}">
-    </select>
+    <input type="text" th:field="${loginuser.name}">
+    <br>
+    <label for="title">タイトル</label>
+    <br>
+    <input type="text" th:field="*{title}">
+    <br>
+    <label for="content">内容</label>
+    <br>
+    <textarea rows="10" cols="50" th:field="*{content}"></textarea>
     <br>
     <input type="submit" value="投稿">
+    <p><a th:href="@{/report/list}">一覧に戻る</a></p>
     </form>
-
-    <p><a th:href="@{/employee/delete/{id}/(id=${employee.id})}">削除</a></p>
-    <p><a th:href="@{/employee/list}">一覧に戻る</a></p>
-
-
 </body>
 </html>

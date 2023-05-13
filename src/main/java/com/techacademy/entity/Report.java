@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -26,6 +28,7 @@ public class Report {
     private Integer id;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reportDate;
 
     @Column(length = 255, nullable = false)
@@ -36,6 +39,7 @@ public class Report {
     private String content;
 
     @ManyToOne
+    @Valid
     @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
     private Employee employee;
 
