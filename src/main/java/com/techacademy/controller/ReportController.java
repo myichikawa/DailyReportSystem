@@ -45,11 +45,11 @@ public class ReportController {
     }
     // 登録処理
     @PostMapping("/register")
-    public String postRegister(@Validated Report report, @AuthenticationPrincipal UserDetail userDetail, Model model, BindingResult res) {
+    public String postRegister(@Validated Report report, BindingResult res, @AuthenticationPrincipal UserDetail userDetail, Model model) {
 
         if(res.hasErrors()) {
             // エラーあり
-            return getRegister(report, userDetail, model);
+            return getRegister(report, userDetail,model);
         }
 
         report.setEmployee(userDetail.getEmployee());
@@ -67,7 +67,12 @@ public class ReportController {
 
     // 更新処理
     @PostMapping("/update/{id}")
-    public String postUpdate(@PathVariable("id") Integer id, Report report, @AuthenticationPrincipal UserDetail userDetail, Model model) {
+    public String postUpdate(@PathVariable("id") Integer id, @Validated Report report, BindingResult res, @AuthenticationPrincipal UserDetail userDetail, Model model) {
+        if(res.hasErrors()) {
+            // エラーあり
+            return getUpdate(report.getId(), userDetail, model);
+        }
+
         model.addAttribute("loginuser", userDetail.getEmployee());
         model.addAttribute("report", service.getReport(id));
 
@@ -79,4 +84,5 @@ public class ReportController {
             return "redirect:/report/list";
 
     }
+
 }

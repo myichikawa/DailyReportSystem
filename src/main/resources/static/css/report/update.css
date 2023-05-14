@@ -5,3 +5,10 @@ label {
     width: 8em;
     line-height: 150%;
 }
+pre {
+    font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+}
+
+.err {
+    color: red;
+}

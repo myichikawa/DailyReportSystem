@@ -29,17 +29,17 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
     @NotNull
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reportDate;
 
-    @Column(length = 255, nullable = false)
     @NotEmpty
+    @Column(length = 255, nullable = false)
     private String title;
 
-    @Column(nullable = false)
     @NotEmpty
+    @Column(nullable = false)
     @Type(type="text")
     private String content;
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.techacademy.entity.Employee;
 import com.techacademy.entity.Report;
 import com.techacademy.repository.ReportRepository;
 
@@ -15,6 +16,7 @@ public class ReportService {
     public ReportService(ReportRepository repository) {
         this.reportRepository = repository;
     }
+
 
     //全件検索
     public List<Report> getReportList() {
@@ -28,6 +30,10 @@ public class ReportService {
     //レコード数のカウント
     public long index() {
         return reportRepository.count();
+    }
+ // トップページに自分の日報一覧を表示する
+    public List<Report> getEmployeeReport(Employee employee){
+        return reportRepository.findByEmployee(employee);
     }
 
     //登録
